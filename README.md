@@ -212,6 +212,13 @@ Running this script will generate a plot comparing the ground truth data against
 
 Additionally, we provide a script that makes predictions without Volume and Amount data, which can be found in [`examples/prediction_wo_vol_example.py`](examples/prediction_wo_vol_example.py).
 
+If you want to pull your own data, you can run [`examples/get_data.py`](examples/get_data.py) to get the stock data you want by changing the ticker name. It will be saved in data folder as csv.
+
+If you want to do prediction of that stock for the next 6 hours, you can run [`examples/future_prediction.py`](examples/future_prediction.py).
+
+<p align="center">
+    <img src="figures/future_prediction.png" alt="Forecast Example" align="center" width="600px" />
+</p>
 
 ## 🔧 Finetuning on Your Own Data (A-Share Market Example)
 
@@ -324,6 +331,7 @@ If you use Kronos in your research, we would appreciate a citation to our [paper
 
 ## 📜 License 
 This project is licensed under the [MIT License](./LICENSE).
+
 
 
 
