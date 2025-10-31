@@ -1,34 +1,12 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import timedelta, time
-import yfinance as yf
 import torch
 import sys
 
-# If Kronos modules are in a parent directory
 sys.path.append("../")
 
 from model import Kronos, KronosTokenizer, KronosPredictor
-
-
-# def fetch_recent_data(ticker="NVDA", interval="5m", period="5d"):
-#     """
-#     Fetch latest 5-minute stock data from Yahoo Finance.
-#     """
-#     df = yf.download(ticker, period=period, interval=interval)
-#     df = df.xs(ticker, axis=1, level='Ticker')
-
-#     df.reset_index(inplace=True)
-#     df.rename(columns={
-#         'Datetime': 'timestamps',
-#         'Open': 'open',
-#         'High': 'high',
-#         'Low': 'low',
-#         'Close': 'close',
-#         'Volume': 'volume'
-#     }, inplace=True)
-#     print(f"Fetched {len(df)} rows of data for {ticker}. Latest: {df['timestamps'].iloc[-1]}")
-#     return df
 
 def generate_future_timestamps(last_time, pred_len, freq='5min'):
     last_time = pd.Timestamp(last_time)
@@ -40,17 +18,9 @@ def generate_future_timestamps(last_time, pred_len, freq='5min'):
             hour=9, minute=30, second=0, microsecond=0
         )
     else:
-        # Otherwise, just add one interval
         next_start = last_time
 
     return pd.date_range(start=next_start + timedelta(minutes=5), periods=pred_len, freq=freq)
-
-
-# def generate_future_timestamps(last_time, pred_len, freq='5min'):
-#     """
-#     Generate timestamps into the future.
-#     """
-#     return pd.date_range(start=last_time + timedelta(minutes=5), periods=pred_len, freq=freq)
 
 
 def plot_forecast(history_df, pred_df):
